@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - SIPAT</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            background-color: #f4f7fa;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            font-size: 20px;
+            padding: 20px 0;
+            margin: 0;
+            color: #58b1ff;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Menu Item */
+        .menu-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid #34495e;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .menu-item:hover { background-color: #34495e; }
+        .menu-item.active { background-color: #539df1; border-left: 5px solid white; }
+
+        /* LOG AKTIVITAS DI SIDEBAR */
+        .sidebar-log {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #1a252f;
+            cursor: pointer;
+        }
+
+        .sidebar-log h4 { margin: 0 0 10px 0; color: #bdc3c7; font-size: 12px; }
+
+        .log-item {
+            margin-bottom: 12px;
+            padding: 8px;
+            border-bottom: 1px solid #2c3e50;
+            border-radius: 5px;
+        }
+        .log-item:hover { background: #2c3e50; }
+        .log-item p { margin: 3px 0; color: #ecf0f1; font-size: 11px; }
+
+        /* MAIN CONTENT */
+        .content {
+            margin-left: 280px;
+            padding: 30px;
+            width: 100%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px 30px;
+            margin: -30px -30px 30px -30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .main-card {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #display-title { color: #2c3e50; margin-bottom: 10px; text-transform: uppercase; }
+
+        .btn-logout {
+            background-color: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>SIPAT ADMIN</h2>
+        <menu id="main-menu">
+            <li class="menu-item active" onclick="changeContent('Dashboard')">🏠 Dashboard</li>
+            <li class="menu-item" onclick="changeContent('Alat')">🔧 Alat</li>
+            <li class="menu-item" onclick="changeContent('User')">👥 User</li>
+            <li class="menu-item" onclick="changeContent('Kategori')">📁 Kategori</li>
+            <li class="menu-item" onclick="changeContent('Peminjaman')">📤 Peminjaman</li>
+            <li class="menu-item" onclick="changeContent('Pengembalian')">📥 Pengembalian</li>
+            <li class="menu-item" onclick="window.location.href='index.html'" style="color: #ff7675;">🚪 Keluar</li>
+        </menu>
+
+        <div class="sidebar-log" onclick="changeContent('Log Aktivitas')">
+            <h4>📜 Log Aktifitas</h4>
+            <div class="log-item">
+                <p><b>Andi</b> meminjam Proyektor</p>
+                <small style="color: #f39c12;">10:45 - Keluar</small>
+            </div>
+            <div class="log-item">
+                <p><b>Siti</b> mengembalikan Kamera</p>
+                <small style="color: #27ae60;">09:15 - Kembali</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <h3>Panel Admin SIPAT</h3>
+            <a href="index.html" class="btn-logout">Logout</a>
+        </div>
+
+        <div class="main-card">
+            <h1 id="display-title">SELAMAT DATANG DASHBOARD</h1>
+            <p id="display-desc">Silakan pilih menu di samping untuk melihat detail data.</p>
+            <hr style="width: 50px; border: 2px solid #539df1; margin: 20px auto;">
+        </div>
+    </div>
+
+    <script>
+        function changeContent(menuName) {
+            // 1. Mengubah Judul Besar di Tengah
+            document.getElementById('display-title').innerText = "SELAMAT DATANG " + menuName;
+            
+            // 2. Mengubah Deskripsi (Opsional)
+            document.getElementById('display-desc').innerText = "Anda sedang berada di halaman manajemen " + menuName + ".";
+
+            // 3. Mengatur gaya 'active' pada menu yang diklik
+            let items = document.querySelectorAll('.menu-item');
+            items.forEach(item => {
+                item.classList.remove('active');
+                if(item.innerText.includes(menuName)) {
+                    item.classList.add('active');
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

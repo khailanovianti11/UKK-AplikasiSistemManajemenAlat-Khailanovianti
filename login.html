@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Login SIPAT</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(to right, #58b1ff, #539df1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 350px;
+            background: rgba(255,255,255,0.2);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .sub {
+            text-align: center;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .role {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .role button {
+            width: 32%;
+            padding: 8px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.3);
+            color: white;
+            cursor: pointer;
+        }
+
+        .role button.active {
+            background: white;
+            color: black;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            border: none;
+            border-radius: 8px;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Masuk ke SIPAT</h2>
+    <div class="sub">Pilih peran dan masukkan kredensial Anda</div>
+
+    <!-- ROLE -->
+    <div class="role">
+        <button onclick="setRole(this,'admin')">Admin</button>
+        <button onclick="setRole(this,'petugas')">Petugas</button>
+        <button onclick="setRole(this,'user')" class="active">User</button>
+    </div>
+
+    <form action="admin.html">
+    <p>Pilih Peran: <b>Admin</b></p>
+    
+    <input type="text" id="username" placeholder="Username (Boleh kosong)">
+    <br><br>
+    <input type="password" id="password" placeholder="Password (Boleh kosong)">
+    <br><br>
+
+    <button type="submit">Masuk</button>
+</form>
+
+    <a href="index.html" class="back">← Kembali ke home</a>
+</div>
+
+<script>
+function setRole(el, role) {
+    document.getElementById('role').value = role;
+
+    let btn = document.querySelectorAll('.role button');
+    btn.forEach(b => b.classList.remove('active'));
+
+    el.classList.add('active');
+}
+
+// SIMULASI LOGIN (sementara)
+function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(user === "" || pass === "") {
+        alert("Isi username dan password!");
+        return false;
+    }
+
+    alert("Login berhasil (dummy)");
+    return false; // belum pindah halaman
+}
+</script>
+
+</body>
+</html>
